@@ -1,20 +1,17 @@
 
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-// Ensure process.env.API_KEY is recognized by the compiler
-const apiKey = (process.env as any).API_KEY;
-const getAI = () => new GoogleGenAI({ apiKey: apiKey || "" });
-
 const SYSTEM_INSTRUCTION = `You are a dedicated scholar of Swami Vivekananda's teachings and life. 
 Your tone is respectful, insightful, and empowering. 
 Reference his Complete Works, the concept of "Practical Vedanta", the four Yogas (Karma, Bhakti, Raja, Jnana), and his vision for the youth and women. 
 Help users apply his timeless wisdom to modern challenges. 
 When asked about his biography, provide rich, historical details. 
-Always encourage the user to "Arise, awake, and stop not till the goal is reached."`;
+Always encourage the user to "Arise, awake, and stop not till the goal is reached."
+If the user says 'Namaste' or greetings, respond with a warm, spiritual greeting in character.`;
 
 export const geminiService = {
   async *streamWisdom(message: string) {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const chat = ai.chats.create({
       model: 'gemini-3-flash-preview',
       config: {
@@ -30,7 +27,7 @@ export const geminiService = {
   },
 
   async generateReflection(prompt: string, taskType: string) {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
       contents: `Context: Learning from Swami Vivekananda.
@@ -47,7 +44,7 @@ Provide a deep philosophical reflection or structured draft based on the above.`
   },
 
   async generateImage(prompt: string, aspectRatio: "1:1" | "16:9" | "9:16") {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: {
@@ -73,7 +70,7 @@ Provide a deep philosophical reflection or structured draft based on the above.`
   },
 
   async searchGrounding(query: string) {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: `Find accurate historical information or current relevance regarding: ${query}. Focus on Swami Vivekananda and Ramakrishna Mission.`,
