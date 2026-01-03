@@ -49,84 +49,72 @@ const WisdomChat: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full rounded-[3rem] overflow-hidden relative shadow-2xl bg-[#050505] border border-white/5">
-      {/* Background Decor - Large Subtle Om */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
-        <div className="opacity-[0.03] select-none scale-[2] md:scale-[3] transition-transform duration-1000">
-          <svg viewBox="0 0 100 100" className="w-[300px] h-[300px] fill-white">
-            <text x="50" y="50" textAnchor="middle" dominantBaseline="middle" fontSize="60" fontFamily="serif">🕉️</text>
-          </svg>
-        </div>
+    <div className="flex flex-col h-full rounded-[4rem] overflow-hidden relative shadow-2xl glass-card">
+      {/* Background Decor - Massive Ethereal Symbol */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden opacity-[0.02]">
+         <span className="text-[50rem] font-serif font-black select-none">ॐ</span>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 md:p-14 space-y-12 scroll-smooth relative z-10">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-12 md:p-20 space-y-16 scroll-smooth relative z-10 custom-scrollbar">
         {messages.map((msg) => (
-          <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-6 duration-700`}>
-            <div className={`flex gap-4 max-w-[85%] ${msg.role === 'user' ? 'flex-row' : 'flex-row'}`}>
+          <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} reveal`}>
+            <div className={`flex gap-6 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
               
-              {/* Model Avatar */}
-              {msg.role === 'model' && (
-                <div className="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center font-serif font-bold text-xl bg-stone-900 border border-white/10 text-stone-400 shadow-xl">
-                  V
-                </div>
-              )}
+              <div className={`w-16 h-16 rounded-[1.5rem] flex-shrink-0 flex items-center justify-center font-serif font-black text-2xl shadow-2xl transition-all duration-700 ${
+                msg.role === 'user' ? 'bg-orange-600 text-white border-2 border-[#050505]' : 'bg-stone-900 border border-white/10 text-stone-400'
+              }`}>
+                {msg.role === 'user' ? 'Me' : 'V'}
+              </div>
 
-              <div className="flex flex-col gap-2">
-                <div className={`px-10 py-8 rounded-[2.5rem] shadow-2xl relative ${
+              <div className="flex flex-col gap-3">
+                <div className={`px-12 py-10 rounded-[3rem] shadow-2xl relative border transition-all duration-1000 ${
                   msg.role === 'user' 
-                    ? 'bg-[#ea580c] text-white rounded-tr-[1rem]' 
-                    : 'bg-stone-900/40 backdrop-blur-3xl text-stone-200 border border-white/5 rounded-tl-[1rem]'
+                    ? 'bg-orange-600 text-white rounded-tr-[1rem] border-orange-500' 
+                    : 'bg-stone-900/60 backdrop-blur-3xl text-stone-200 border-white/5 rounded-tl-[1rem] hover:border-orange-500/20'
                 }`}>
-                  <p className={`text-xl md:text-2xl whitespace-pre-wrap leading-relaxed font-serif italic ${msg.role === 'user' ? 'font-normal' : 'font-light'}`}>
+                  <p className={`text-2xl md:text-3xl whitespace-pre-wrap leading-relaxed font-serif ${msg.role === 'user' ? 'font-medium' : 'font-light italic'}`}>
                     {msg.text || (isLoading && msg.role === 'model' ? '...' : '')}
                   </p>
-                  <div className={`mt-6 text-[10px] uppercase tracking-[0.3em] font-bold opacity-40 text-right ${msg.role === 'user' ? 'text-white' : 'text-stone-500'}`}>
+                  <div className={`mt-8 text-[10px] uppercase tracking-[0.5em] font-black opacity-30 text-right ${msg.role === 'user' ? 'text-white' : 'text-stone-500'}`}>
                     {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
               </div>
-
-              {/* User Avatar / "Me" Badge */}
-              {msg.role === 'user' && (
-                <div className="w-14 h-14 rounded-3xl flex-shrink-0 flex items-center justify-center bg-[#ea580c] text-white shadow-2xl border-4 border-[#050505]">
-                  <span className="font-serif font-bold text-lg">Me</span>
-                </div>
-              )}
             </div>
           </div>
         ))}
         
         {isLoading && (
-          <div className="flex justify-start items-center gap-4 opacity-30 px-4">
-            <div className="flex gap-1.5">
-              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
-              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+          <div className="flex justify-start items-center gap-6 px-20">
+            <div className="flex gap-2">
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
             </div>
           </div>
         )}
       </div>
 
-      {/* Input Bar Section */}
-      <div className="p-12 bg-transparent relative z-10">
+      <div className="p-16 bg-transparent relative z-10 border-t border-white/5">
         <div className="max-w-4xl mx-auto relative group">
           <input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Ask Swamiji anything..."
-            className="w-full bg-[#111] text-white rounded-full border border-white/10 px-10 py-6 text-xl focus:border-orange-500/40 outline-none transition-all placeholder:text-stone-700 shadow-[0_10px_40px_rgba(0,0,0,0.5)] pr-24"
+            placeholder="Seek the Light..."
+            className="w-full bg-[#111] text-white rounded-full border border-white/10 px-12 py-8 text-2xl focus:border-orange-500 focus:bg-[#151515] outline-none transition-all placeholder:text-stone-700 shadow-[0_20px_60px_rgba(0,0,0,0.8)] pr-28"
           />
           <button 
             onClick={handleSend} 
             disabled={!inputValue.trim() || isLoading} 
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-16 h-16 bg-stone-800 hover:bg-stone-700 disabled:bg-stone-900/50 disabled:text-stone-800 text-white rounded-full transition-all active:scale-95 flex items-center justify-center shadow-2xl group-hover:bg-stone-700"
+            className="absolute right-5 top-1/2 -translate-y-1/2 w-16 h-16 bg-orange-600 hover:bg-orange-500 disabled:bg-stone-900/50 disabled:text-stone-800 text-white rounded-full transition-all active:scale-95 flex items-center justify-center shadow-2xl saffron-glow"
           >
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
         </div>
+        <p className="text-center mt-8 text-[9px] uppercase tracking-[0.6em] text-stone-600 font-black">Powered by Gemini 3 Flash Oracle</p>
       </div>
     </div>
   );

@@ -4,84 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIVEKA: The Wisdom Path</title>
+    <title>VIVEKA | The Eternal Wisdom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-          color-scheme: dark;
-          --saffron: #fb923c;
+          --saffron: #f97316;
+          --deep-saffron: #ea580c;
           --obsidian: #050505;
+          --gold: #d4af37;
+          --glass: rgba(255, 255, 255, 0.03);
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--obsidian);
-            color: #f5f5f4;
+            color: #fafaf9;
             margin: 0;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
         }
-        h1, h2, h3, h4, h5, .font-serif {
-            font-family: 'Playfair Display', serif;
+
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Cinematic Mesh Gradient */
+        .mesh-bg {
+            background: 
+                radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.08) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.08) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.05) 0, transparent 50%);
         }
-        .saffron-gradient {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-        }
-        .glass-panel {
+
+        .glass-card {
             background: rgba(15, 15, 15, 0.4);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(40px, -60px) scale(1.1); }
-          66% { transform: translate(-30px, 30px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 30s linear infinite;
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .fade-in {
-          animation: fadeIn 2s cubic-bezier(0.2, 0, 0.2, 1);
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
+        .glass-card:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            background: rgba(20, 20, 20, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
         }
 
-        ::-webkit-scrollbar { width: 4px; }
+        .saffron-glow {
+            box-shadow: 0 0 40px -10px rgba(249, 115, 22, 0.3);
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-rotate-slow { animation: rotate-slow 35s linear infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-float { animation: float 10s ease-in-out infinite; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        .reveal { animation: reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        .text-reveal-gold {
+            background: linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 6s linear infinite;
+        }
+
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--obsidian); }
-        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #f97316; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--saffron); }
 
-        html {
-          scroll-behavior: smooth;
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.02;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
         }
-
-        button {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Premium Text Rendering */
-        .tracking-tighter { letter-spacing: -0.05em; }
-        .tracking-widest { letter-spacing: 0.2em; }
     </style>
 <script type="importmap">
 {
@@ -97,6 +114,7 @@
 </script>
 </head>
 <body>
+    <div class="noise-overlay"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>
