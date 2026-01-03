@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of VIVEKA: The Wisdom Path",
+  "description": "A comprehensive immersive platform for learning from the life and teachings of Swami Vivekananda.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
