@@ -6,8 +6,11 @@ import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Chronicles from './components/Chronicles';
 import WisdomChat from './components/WisdomChat';
-import YogaStudio from './components/YogaStudio';
-import Scribe from './components/Scribe';
+import PhilosophyHub from './components/PhilosophyHub';
+import SocialVision from './components/SocialVision';
+import Institutions from './components/Institutions';
+import Library from './components/Library';
+import Legacy from './components/Legacy';
 import Explorer from './components/Explorer';
 
 const App: React.FC = () => {
@@ -20,29 +23,26 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (currentView) {
-      case AppView.DASHBOARD:
-        return <Dashboard onViewChange={setCurrentView} />;
-      case AppView.CHRONICLES:
-        return <Chronicles />;
-      case AppView.WISDOM_CHAT:
-        return <WisdomChat />;
-      case AppView.YOGA_STUDIO:
-        return <YogaStudio />;
-      case AppView.SCRIBE:
-        return <Scribe />;
-      case AppView.EXPLORER:
-        return <Explorer />;
-      default:
-        return <Dashboard onViewChange={setCurrentView} />;
+      case AppView.DASHBOARD: return <Dashboard onViewChange={setCurrentView} />;
+      case AppView.CHRONICLES: return <Chronicles />;
+      case AppView.PHILOSOPHY: return <PhilosophyHub />;
+      case AppView.SOCIAL_VISION: return <SocialVision />;
+      case AppView.INSTITUTIONS: return <Institutions />;
+      case AppView.LIBRARY: return <Library />;
+      case AppView.LEGACY: return <Legacy />;
+      case AppView.WISDOM_CHAT: return <WisdomChat />;
+      case AppView.EXPLORER: return <Explorer />;
+      default: return <Dashboard onViewChange={setCurrentView} />;
     }
   };
 
   return (
     <div className="flex h-screen bg-[#050505] overflow-hidden selection:bg-orange-500/30 selection:text-white">
-      {/* Dynamic Background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-orange-600/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-stone-900/40 blur-[150px] rounded-full" />
+      {/* Cinematic Background Atmosphere */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-[60%] h-[60%] bg-orange-600/5 blur-[140px] rounded-full animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-stone-900/40 blur-[160px] rounded-full" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10" />
       </div>
 
       <Sidebar 
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         toggleSidebar={toggleSidebar}
       />
       
-      <div className="flex-1 flex flex-col min-w-0 relative">
+      <div className="flex-1 flex flex-col min-w-0 relative z-10">
         <Header 
           currentView={currentView} 
           isSidebarOpen={isSidebarOpen} 

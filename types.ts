@@ -2,9 +2,12 @@
 export enum AppView {
   DASHBOARD = 'dashboard',
   CHRONICLES = 'chronicles',
+  PHILOSOPHY = 'philosophy',
+  SOCIAL_VISION = 'social_vision',
+  INSTITUTIONS = 'institutions',
+  LIBRARY = 'library',
+  LEGACY = 'legacy',
   WISDOM_CHAT = 'wisdom_chat',
-  YOGA_STUDIO = 'yoga_studio',
-  SCRIBE = 'scribe',
   EXPLORER = 'explorer'
 }
 
@@ -20,7 +23,6 @@ export interface SearchResult {
   uri: string;
 }
 
-// Added GeneratedImage interface
 export interface GeneratedImage {
   id: string;
   url: string;

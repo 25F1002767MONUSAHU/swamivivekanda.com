@@ -14,8 +14,13 @@ const Header: React.FC<HeaderProps> = ({ currentView, isSidebarOpen, toggleSideb
       case AppView.DASHBOARD: return 'Grand Home';
       case AppView.CHRONICLES: return 'Life Chronicles';
       case AppView.WISDOM_CHAT: return 'Sacred Dialogue';
-      case AppView.YOGA_STUDIO: return 'The Four Pillars';
-      case AppView.SCRIBE: return 'Philosopher\'s Desk';
+      // Fixed: Replaced YOGA_STUDIO with PHILOSOPHY to match enum definition
+      case AppView.PHILOSOPHY: return 'The Four Pillars';
+      // Fixed: Replaced SCRIBE with SOCIAL_VISION as SCRIBE does not exist in AppView enum
+      case AppView.SOCIAL_VISION: return 'Social Vision';
+      case AppView.INSTITUTIONS: return 'The Mission';
+      case AppView.LIBRARY: return 'Complete Works';
+      case AppView.LEGACY: return 'Global Legacy';
       case AppView.EXPLORER: return 'Global Archive';
       default: return 'Viveka';
     }
@@ -26,8 +31,13 @@ const Header: React.FC<HeaderProps> = ({ currentView, isSidebarOpen, toggleSideb
       case AppView.DASHBOARD: return 'Arise, Awake, and Stop Not';
       case AppView.CHRONICLES: return 'THE JOURNEY OF AN IMMORTAL SOUL';
       case AppView.WISDOM_CHAT: return 'CONVERSATIONS WITH ETERNAL TRUTH';
-      case AppView.YOGA_STUDIO: return 'PATHWAYS TO SELF-REALIZATION';
-      case AppView.SCRIBE: return 'TRANSCRIBING THOUGHT INTO ACTION';
+      // Fixed: Replaced YOGA_STUDIO with PHILOSOPHY
+      case AppView.PHILOSOPHY: return 'PATHWAYS TO SELF-REALIZATION';
+      // Fixed: Replaced SCRIBE with SOCIAL_VISION
+      case AppView.SOCIAL_VISION: return 'FOR THE WELFARE OF THE WORLD';
+      case AppView.INSTITUTIONS: return 'ORGANIZED SERVICE';
+      case AppView.LIBRARY: return '9 VOLUMES OF WISDOM';
+      case AppView.LEGACY: return 'ECHOES ACROSS CENTURIES';
       case AppView.EXPLORER: return 'SEEKING THE LIGHT WORLDWIDE';
       default: return 'MODERN VEDANTA';
     }

@@ -9,6 +9,7 @@ interface YogaDetail {
   principles: string[];
   quote: string;
   longDesc: string;
+  technicalDetails?: string[];
 }
 
 const YogaStudio: React.FC = () => {
@@ -27,7 +28,13 @@ const YogaStudio: React.FC = () => {
         'Purity of motive'
       ],
       quote: "Every duty is holy, and devotion to duty is the highest form of the worship of God.",
-      longDesc: "Karma Yoga is the path of action. It teaches us how to work in the world without being bound by the results of our actions. By performing our duties selflessly, we purify our hearts and eventually realize our true nature. Swami Vivekananda emphasized that no work is 'low' or 'high'—the spirit in which it is done matters most."
+      longDesc: "Karma Yoga is the path of action. It teaches us how to work in the world without being bound by the results of our actions. By performing our duties selflessly, we purify our hearts and eventually realize our true nature.",
+      technicalDetails: [
+        'Perform your duty without desire for personal gain',
+        'Work becomes worship when done as an offering to God',
+        'Non-attachment brings freedom even while acting',
+        'The ideal practice for active people in worldly affairs'
+      ]
     },
     { 
       title: 'Bhakti Yoga', 
@@ -41,7 +48,13 @@ const YogaStudio: React.FC = () => {
         'Self-surrender'
       ],
       quote: "Bhakti is a series or succession of mental efforts at religious realization beginning with ordinary worship and ending in a supreme intensity of love for Ishvara.",
-      longDesc: "Bhakti Yoga is the natural path for those who are emotional by nature. It is the science of higher love. It teaches us how to direct our emotions toward the Divine. Swamiji taught that Bhakti is the easiest path for the modern age, leading from the worship of symbols to the realization of the Infinite Love that pervades the universe."
+      longDesc: "Bhakti Yoga is the natural path for those who are emotional by nature. It is the science of higher love. It teaches us how to direct our emotions toward the Divine. Swamiji taught that Bhakti is the easiest path for the modern age.",
+      technicalDetails: [
+        'Love as the highest spiritual practice',
+        'God can be approached through any name or form',
+        'Devotion purifies the heart and leads to union',
+        'Service to humanity is the highest form of devotion'
+      ]
     },
     { 
       title: 'Raja Yoga', 
@@ -49,13 +62,20 @@ const YogaStudio: React.FC = () => {
       subtitle: 'The Path of Meditation', 
       desc: 'Scientific control of the mind through concentration and ethical living (Ashtanga Yoga).',
       principles: [
-        'Ethical foundations (Yamas/Niyamas)',
+        'Ethical foundations (Yama/Niyama)',
         'Control of Prana (Breath)',
         'Concentration (Dharana)',
         'Super-consciousness (Samadhi)'
       ],
       quote: "Concentration is the essence of all knowledge; nothing can be done without it.",
-      longDesc: "Raja Yoga is the 'Royal Path'. It is a scientific approach to spiritual realization. By controlling the mind and senses, the practitioner attains the highest state of consciousness. Swamiji's book 'Raja Yoga' is considered a masterpiece, explaining the ancient Yoga Sutras of Patanjali for the modern rational mind."
+      longDesc: "Raja Yoga is the 'Royal Path'. It is a scientific approach to spiritual realization. By controlling the mind and senses, the practitioner attains the highest state of consciousness.",
+      technicalDetails: [
+        'Yama: Non-violence, truthfulness, non-stealing',
+        'Niyama: Purity, contentment, self-discipline',
+        'Asana & Pranayama: Physical and breath control',
+        'Pratyahara: Withdrawal of senses inward',
+        'Dharana, Dhyana, Samadhi: The internal journey'
+      ]
     },
     { 
       title: 'Jnana Yoga', 
@@ -69,7 +89,13 @@ const YogaStudio: React.FC = () => {
         'Intense longing for freedom'
       ],
       quote: "The goal of mankind is knowledge... that is the one ideal placed before us by Hindu philosophy.",
-      longDesc: "Jnana Yoga is the path of the intellect. It involves deep philosophical inquiry into the nature of reality. The seeker uses the power of discrimination to distinguish the permanent from the impermanent. Swamiji considered Jnana Yoga as the pinnacle of human thought, where the soul realizes its absolute identity with Brahman."
+      longDesc: "Jnana Yoga is the path of the intellect. It involves deep philosophical inquiry into the nature of reality. The seeker uses the power of discrimination to distinguish the permanent from the impermanent.",
+      technicalDetails: [
+        'Study of sacred texts and philosophical inquiry',
+        'Discrimination between self and non-self',
+        'Detachment from material identification',
+        'Direct realization of identity with Brahman'
+      ]
     }
   ];
 
@@ -104,6 +130,18 @@ const YogaStudio: React.FC = () => {
                   {selectedYoga.longDesc}
                 </p>
               </div>
+              {selectedYoga.technicalDetails && (
+                <div className="space-y-4 p-8 bg-orange-500/5 rounded-3xl border border-orange-500/10">
+                  <h4 className="text-orange-500 font-bold text-xs uppercase tracking-widest">Methodology</h4>
+                  <ul className="space-y-3">
+                    {selectedYoga.technicalDetails.map((detail, idx) => (
+                      <li key={idx} className="text-stone-300 text-sm flex gap-3">
+                        <span className="text-orange-500">•</span> {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <div className="space-y-8">
