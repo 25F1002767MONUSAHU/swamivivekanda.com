@@ -11,6 +11,11 @@ export enum AppView {
   EXPLORER = 'explorer'
 }
 
+export enum Language {
+  EN = 'en',
+  HI = 'hi'
+}
+
 export interface Message {
   id: string;
   role: 'user' | 'model';

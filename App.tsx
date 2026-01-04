@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback } from 'react';
-import { AppView } from './types';
+import { AppView, Language } from './types';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -15,24 +15,29 @@ import Explorer from './components/Explorer';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>(AppView.DASHBOARD);
+  const [language, setLanguage] = useState<Language>(Language.EN);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen(prev => !prev);
   }, []);
 
+  const toggleLanguage = useCallback(() => {
+    setLanguage(prev => prev === Language.EN ? Language.HI : Language.EN);
+  }, []);
+
   const renderView = () => {
     switch (currentView) {
-      case AppView.DASHBOARD: return <Dashboard onViewChange={setCurrentView} />;
-      case AppView.CHRONICLES: return <Chronicles />;
-      case AppView.PHILOSOPHY: return <PhilosophyHub />;
-      case AppView.SOCIAL_VISION: return <SocialVision />;
-      case AppView.INSTITUTIONS: return <Institutions />;
-      case AppView.LIBRARY: return <Library />;
-      case AppView.LEGACY: return <Legacy />;
-      case AppView.WISDOM_CHAT: return <WisdomChat />;
-      case AppView.EXPLORER: return <Explorer />;
-      default: return <Dashboard onViewChange={setCurrentView} />;
+      case AppView.DASHBOARD: return <Dashboard onViewChange={setCurrentView} lang={language} />;
+      case AppView.CHRONICLES: return <Chronicles lang={language} />;
+      case AppView.PHILOSOPHY: return <PhilosophyHub lang={language} />;
+      case AppView.SOCIAL_VISION: return <SocialVision lang={language} />;
+      case AppView.INSTITUTIONS: return <Institutions lang={language} />;
+      case AppView.LIBRARY: return <Library lang={language} />;
+      case AppView.LEGACY: return <Legacy lang={language} />;
+      case AppView.WISDOM_CHAT: return <WisdomChat lang={language} />;
+      case AppView.EXPLORER: return <Explorer lang={language} />;
+      default: return <Dashboard onViewChange={setCurrentView} lang={language} />;
     }
   };
 
@@ -50,13 +55,16 @@ const App: React.FC = () => {
         onViewChange={setCurrentView} 
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
+        lang={language}
       />
       
       <div className="flex-1 flex flex-col min-w-0 relative z-10">
         <Header 
           currentView={currentView} 
           isSidebarOpen={isSidebarOpen} 
-          toggleSidebar={toggleSidebar} 
+          toggleSidebar={toggleSidebar}
+          lang={language}
+          toggleLanguage={toggleLanguage}
         />
         
         <main className="flex-1 overflow-y-auto p-4 md:px-12 md:pb-12 custom-scrollbar">

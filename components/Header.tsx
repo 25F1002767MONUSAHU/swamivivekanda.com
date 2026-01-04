@@ -1,45 +1,61 @@
 
 import React from 'react';
-import { AppView } from '../types';
+import { AppView, Language } from '../types';
 
 interface HeaderProps {
   currentView: AppView;
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
+  lang: Language;
+  toggleLanguage: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentView, isSidebarOpen, toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = ({ currentView, isSidebarOpen, toggleSidebar, lang, toggleLanguage }) => {
+  const isEn = lang === Language.EN;
+
   const getTitle = () => {
-    switch (currentView) {
-      case AppView.DASHBOARD: return 'Grand Home';
-      case AppView.CHRONICLES: return 'Life Chronicles';
-      case AppView.WISDOM_CHAT: return 'Sacred Dialogue';
-      // Fixed: Replaced YOGA_STUDIO with PHILOSOPHY to match enum definition
-      case AppView.PHILOSOPHY: return 'The Four Pillars';
-      // Fixed: Replaced SCRIBE with SOCIAL_VISION as SCRIBE does not exist in AppView enum
-      case AppView.SOCIAL_VISION: return 'Social Vision';
-      case AppView.INSTITUTIONS: return 'The Mission';
-      case AppView.LIBRARY: return 'Complete Works';
-      case AppView.LEGACY: return 'Global Legacy';
-      case AppView.EXPLORER: return 'Global Archive';
-      default: return 'Viveka';
+    if (isEn) {
+      switch (currentView) {
+        case AppView.DASHBOARD: return 'Grand Home';
+        case AppView.CHRONICLES: return 'Life Chronicles';
+        case AppView.WISDOM_CHAT: return 'Sacred Dialogue';
+        case AppView.PHILOSOPHY: return 'The Four Pillars';
+        case AppView.SOCIAL_VISION: return 'Social Vision';
+        case AppView.INSTITUTIONS: return 'The Mission';
+        case AppView.LIBRARY: return 'Complete Works';
+        case AppView.LEGACY: return 'Global Legacy';
+        case AppView.EXPLORER: return 'Global Archive';
+        default: return 'Viveka';
+      }
+    } else {
+      switch (currentView) {
+        case AppView.DASHBOARD: return 'मुख्य पृष्ठ';
+        case AppView.CHRONICLES: return 'जीवन इतिहास';
+        case AppView.WISDOM_CHAT: return 'पावन संवाद';
+        case AppView.PHILOSOPHY: return 'चार स्तंभ';
+        case AppView.SOCIAL_VISION: return 'सामाजिक दृष्टि';
+        case AppView.INSTITUTIONS: return 'मिशन';
+        case AppView.LIBRARY: return 'संपूर्ण ग्रंथ';
+        case AppView.LEGACY: return 'वैश्विक विरासत';
+        case AppView.EXPLORER: return 'वैश्विक संग्रह';
+        default: return 'विवेक';
+      }
     }
   };
 
   const getSubtitle = () => {
-    switch (currentView) {
-      case AppView.DASHBOARD: return 'Arise, Awake, and Stop Not';
-      case AppView.CHRONICLES: return 'THE JOURNEY OF AN IMMORTAL SOUL';
-      case AppView.WISDOM_CHAT: return 'CONVERSATIONS WITH ETERNAL TRUTH';
-      // Fixed: Replaced YOGA_STUDIO with PHILOSOPHY
-      case AppView.PHILOSOPHY: return 'PATHWAYS TO SELF-REALIZATION';
-      // Fixed: Replaced SCRIBE with SOCIAL_VISION
-      case AppView.SOCIAL_VISION: return 'FOR THE WELFARE OF THE WORLD';
-      case AppView.INSTITUTIONS: return 'ORGANIZED SERVICE';
-      case AppView.LIBRARY: return '9 VOLUMES OF WISDOM';
-      case AppView.LEGACY: return 'ECHOES ACROSS CENTURIES';
-      case AppView.EXPLORER: return 'SEEKING THE LIGHT WORLDWIDE';
-      default: return 'MODERN VEDANTA';
+    if (isEn) {
+      switch (currentView) {
+        case AppView.DASHBOARD: return 'Arise, Awake, and Stop Not';
+        case AppView.CHRONICLES: return 'THE JOURNEY OF AN IMMORTAL SOUL';
+        default: return 'MODERN VEDANTA';
+      }
+    } else {
+      switch (currentView) {
+        case AppView.DASHBOARD: return 'उठो, जागो और तब तक मत रुको';
+        case AppView.CHRONICLES: return 'एक अमर आत्मा की यात्रा';
+        default: return 'आधुनिक वेदांत';
+      }
     }
   };
 
@@ -60,17 +76,20 @@ const Header: React.FC<HeaderProps> = ({ currentView, isSidebarOpen, toggleSideb
         </div>
       </div>
       
-      <div className="hidden sm:flex items-center gap-6">
-        <div className="flex gap-2">
-           {[1,2,3].map(i => (
-             <div key={i} className={`w-10 h-10 rounded-full border border-white/10 ${i === 2 ? 'bg-stone-800' : 'bg-stone-900/30'} flex items-center justify-center text-xs font-bold text-stone-500`}>
-               {i}
-             </div>
-           ))}
-        </div>
-        <div className="px-5 py-2.5 rounded-full border border-orange-500/20 bg-orange-500/5 flex items-center gap-3 backdrop-blur-xl group cursor-help">
+      <div className="flex items-center gap-6">
+        {/* Language Switcher */}
+        <button 
+          onClick={toggleLanguage}
+          className="px-6 py-2.5 rounded-full border border-white/10 glass-panel hover:border-orange-500/40 transition-all flex items-center gap-3 group active:scale-95"
+        >
+          <span className={`text-xs font-bold tracking-widest ${isEn ? 'text-white' : 'text-stone-500'}`}>EN</span>
+          <div className="w-[1px] h-3 bg-stone-700" />
+          <span className={`text-sm font-bold ${!isEn ? 'text-orange-500' : 'text-stone-500'}`}>हिन्दी</span>
+        </button>
+
+        <div className="hidden sm:flex px-5 py-2.5 rounded-full border border-orange-500/20 bg-orange-500/5 items-center gap-3 backdrop-blur-xl">
           <div className="w-2 h-2 rounded-full bg-orange-600 shadow-[0_0_10px_rgba(249,115,22,1)]" />
-          <span className="text-[10px] font-bold text-orange-200 uppercase tracking-[0.2em]">DIRECT GUIDANCE ACTIVE</span>
+          <span className="text-[10px] font-bold text-orange-200 uppercase tracking-[0.2em]">{isEn ? 'GUIDANCE ACTIVE' : 'मार्गदर्शन सक्रिय'}</span>
         </div>
       </div>
     </header>
